@@ -1,0 +1,16 @@
+﻿using AstroTogether.Common;
+
+namespace AstroTogether.BackEnd.DB;
+
+public partial class Site
+{
+    public Guid SiteId { get; set; }
+    public Guid ClubId { get; set; }
+    public string Name { get; set; } = null!;
+    public string Blurb { get; set; } = null!;
+    public SiteStatus Status { get; set; }
+    public SiteDetails Details { get; set; } = null!;
+
+    public virtual Club Club { get; set; } = null!;
+    public virtual ICollection<Meet> Meets { get; } = new List<Meet>();
+}
