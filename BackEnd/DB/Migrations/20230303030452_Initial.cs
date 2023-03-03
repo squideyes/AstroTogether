@@ -87,10 +87,10 @@ namespace AstroTogether.BackEnd.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Team",
+                name: "Crew",
                 columns: table => new
                 {
-                    TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CrewId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClubId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AdminId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(25)", unicode: false, maxLength: 25, nullable: false),
@@ -99,14 +99,14 @@ namespace AstroTogether.BackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Team", x => x.TeamId);
+                    table.PrimaryKey("PK_Crew", x => x.CrewId);
                     table.ForeignKey(
-                        name: "FK_Team_Club",
+                        name: "FK_Crew_Club",
                         column: x => x.ClubId,
                         principalTable: "Club",
                         principalColumn: "ClubId");
                     table.ForeignKey(
-                        name: "FK_Team_Member",
+                        name: "FK_Crew_Member",
                         column: x => x.AdminId,
                         principalTable: "Member",
                         principalColumn: "MemberId");
@@ -118,7 +118,7 @@ namespace AstroTogether.BackEnd.Migrations
                 {
                     MeetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SiteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CrewId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "date", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Details = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -127,15 +127,15 @@ namespace AstroTogether.BackEnd.Migrations
                 {
                     table.PrimaryKey("PK_Meet", x => x.MeetId);
                     table.ForeignKey(
+                        name: "FK_Meet_Crew",
+                        column: x => x.CrewId,
+                        principalTable: "Crew",
+                        principalColumn: "CrewId");
+                    table.ForeignKey(
                         name: "FK_Meet_Site",
                         column: x => x.SiteId,
                         principalTable: "Site",
                         principalColumn: "SiteId");
-                    table.ForeignKey(
-                        name: "FK_Meet_Team",
-                        column: x => x.TeamId,
-                        principalTable: "Team",
-                        principalColumn: "TeamId");
                 });
 
             migrationBuilder.CreateTable(
@@ -191,15 +191,25 @@ namespace AstroTogether.BackEnd.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meet_SiteId_TeamId_Date",
-                table: "Meet",
-                columns: new[] { "SiteId", "TeamId", "Date" },
-                unique: true);
+                name: "IX_Crew_AdminId",
+                table: "Crew",
+                column: "AdminId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meet_TeamId",
+                name: "IX_Crew_ClubId_Name",
+                table: "Crew",
+                columns: new[] { "ClubId", "Name" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meet_CrewId",
                 table: "Meet",
-                column: "TeamId");
+                column: "CrewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meet_SiteId_CrewId_Date",
+                table: "Meet",
+                columns: new[] { "SiteId", "CrewId", "Date" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Member_ActorId",
@@ -223,16 +233,6 @@ namespace AstroTogether.BackEnd.Migrations
                 table: "Site",
                 column: "Name",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Team_AdminId",
-                table: "Team",
-                column: "AdminId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Team_ClubId_Name",
-                table: "Team",
-                columns: new[] { "ClubId", "Name" });
         }
 
         /// <inheritdoc />
@@ -245,10 +245,10 @@ namespace AstroTogether.BackEnd.Migrations
                 name: "Meet");
 
             migrationBuilder.DropTable(
-                name: "Site");
+                name: "Crew");
 
             migrationBuilder.DropTable(
-                name: "Team");
+                name: "Site");
 
             migrationBuilder.DropTable(
                 name: "Member");

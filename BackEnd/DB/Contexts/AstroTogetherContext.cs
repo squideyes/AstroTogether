@@ -20,7 +20,7 @@ public partial class AstroTogetherContext : DbContext
     public virtual DbSet<Meet> Meets { get; set; }
     public virtual DbSet<Member> Members { get; set; }
     public virtual DbSet<Site> Sites { get; set; }
-    public virtual DbSet<Team> Teams { get; set; }
+    public virtual DbSet<Crew> Crews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -100,8 +100,8 @@ public partial class AstroTogetherContext : DbContext
         {
             entity.ToTable("Meet");
 
-            entity.HasIndex(e => new { e.SiteId, e.TeamId, e.Date },
-                "IX_Meet_SiteId_TeamId_Date").IsUnique();
+            entity.HasIndex(e => new { e.SiteId, e.CrewId, e.Date },
+                "IX_Meet_SiteId_CrewId_Date").IsUnique();
 
             entity.Property(e => e.MeetId)
                 .ValueGeneratedNever();
@@ -116,10 +116,10 @@ public partial class AstroTogetherContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Meet_Site");
 
-            entity.HasOne(d => d.Team).WithMany(p => p.Meets)
-                .HasForeignKey(d => d.TeamId)
+            entity.HasOne(d => d.Crew).WithMany(p => p.Meets)
+                .HasForeignKey(d => d.CrewId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Meet_Team");
+                .HasConstraintName("FK_Meet_Crew");
         });
 
         modelBuilder.Entity<Member>(entity =>
@@ -170,14 +170,14 @@ public partial class AstroTogetherContext : DbContext
                 .HasConstraintName("FK_Site_Club");
         });
 
-        modelBuilder.Entity<Team>(entity =>
+        modelBuilder.Entity<Crew>(entity =>
         {
-            entity.ToTable("Team");
+            entity.ToTable("Crew");
 
             entity.HasIndex(e => new { e.ClubId, e.Name },
-                "IX_Team_ClubId_Name");
+                "IX_Crew_ClubId_Name");
 
-            entity.Property(e => e.TeamId)
+            entity.Property(e => e.CrewId)
                 .ValueGeneratedNever();
 
             entity.Property(e => e.Name)
@@ -186,15 +186,15 @@ public partial class AstroTogetherContext : DbContext
 
             entity.OwnsOne(e => e.Policy, b => b.ToJson());
 
-            entity.HasOne(d => d.Admin).WithMany(p => p.Teams)
+            entity.HasOne(d => d.Admin).WithMany(p => p.Crews)
                 .HasForeignKey(d => d.AdminId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Team_Member");
+                .HasConstraintName("FK_Crew_Member");
 
-            entity.HasOne(d => d.Club).WithMany(p => p.Teams)
+            entity.HasOne(d => d.Club).WithMany(p => p.Crews)
                 .HasForeignKey(d => d.ClubId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Team_Club");
+                .HasConstraintName("FK_Crew_Club");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,6 +1,6 @@
 ﻿namespace AstroTogether.Common;
 
-public enum TeamStatus
+public enum CrewStatus
 {
     Active = 1,
     Inactive,

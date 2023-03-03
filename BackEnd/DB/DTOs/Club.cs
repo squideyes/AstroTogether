@@ -9,6 +9,6 @@ public partial class Club
     public ClubStatus Status { get; set; }
 
     public virtual ICollection<Site> Sites { get; } = new List<Site>();
-    public virtual ICollection<Team> Teams { get; } = new List<Team>();
+    public virtual ICollection<Crew> Crews { get; } = new List<Crew>();
     public virtual ICollection<Member> Members { get; } = new List<Member>();
 }

@@ -13,5 +13,5 @@ public partial class Member
     public virtual Actor Actor { get; set; } = null!;
     public virtual ICollection<Attendee> Attendees { get; } = new List<Attendee>();
     public virtual Club Club { get; set; } = null!;
-    public virtual ICollection<Team> Teams { get; } = new List<Team>();
+    public virtual ICollection<Crew> Crews { get; } = new List<Crew>();
 }

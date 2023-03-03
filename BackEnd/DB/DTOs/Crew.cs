@@ -2,14 +2,14 @@
 
 namespace AstroTogether.BackEnd.DB;
 
-public partial class Team
+public partial class Crew
 {
-    public Guid TeamId { get; set; }
+    public Guid CrewId { get; set; }
     public Guid ClubId { get; set; }
     public Guid AdminId { get; set; }
     public string Name { get; set; } = null!;
-    public TeamStatus Status { get; set; }
-    public TeamPolicy Policy { get; set; } = null!;
+    public CrewStatus Status { get; set; }
+    public CrewPolicy Policy { get; set; } = null!;
 
     public virtual Member Admin { get; set; } = null!;
     public virtual Club Club { get; set; } = null!;

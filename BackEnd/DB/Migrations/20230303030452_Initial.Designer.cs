@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AstroTogether.BackEnd.Migrations
 {
     [DbContext(typeof(AstroTogetherContext))]
-    [Migration("20230219035929_Initial")]
+    [Migration("20230303030452_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -113,9 +113,41 @@ namespace AstroTogether.BackEnd.Migrations
                     b.ToTable("Club", (string)null);
                 });
 
+            modelBuilder.Entity("AstroTogether.BackEnd.DB.Crew", b =>
+                {
+                    b.Property<Guid>("CrewId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AdminId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClubId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("CrewId");
+
+                    b.HasIndex("AdminId");
+
+                    b.HasIndex(new[] { "ClubId", "Name" }, "IX_Crew_ClubId_Name");
+
+                    b.ToTable("Crew", (string)null);
+                });
+
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Meet", b =>
                 {
                     b.Property<Guid>("MeetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CrewId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
@@ -127,14 +159,11 @@ namespace AstroTogether.BackEnd.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TeamId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("MeetId");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("CrewId");
 
-                    b.HasIndex(new[] { "SiteId", "TeamId", "Date" }, "IX_Meet_SiteId_TeamId_Date")
+                    b.HasIndex(new[] { "SiteId", "CrewId", "Date" }, "IX_Meet_SiteId_CrewId_Date")
                         .IsUnique();
 
                     b.ToTable("Meet", (string)null);
@@ -200,35 +229,6 @@ namespace AstroTogether.BackEnd.Migrations
                     b.ToTable("Site", (string)null);
                 });
 
-            modelBuilder.Entity("AstroTogether.BackEnd.DB.Team", b =>
-                {
-                    b.Property<Guid>("TeamId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AdminId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(25)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("TeamId");
-
-                    b.HasIndex("AdminId");
-
-                    b.HasIndex(new[] { "ClubId", "Name" }, "IX_Team_ClubId_Name");
-
-                    b.ToTable("Team", (string)null);
-                });
-
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Attendee", b =>
                 {
                     b.HasOne("AstroTogether.BackEnd.DB.Meet", "Meet")
@@ -248,19 +248,59 @@ namespace AstroTogether.BackEnd.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("AstroTogether.BackEnd.DB.Crew", b =>
+                {
+                    b.HasOne("AstroTogether.BackEnd.DB.Member", "Admin")
+                        .WithMany("Crews")
+                        .HasForeignKey("AdminId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Crew_Member");
+
+                    b.HasOne("AstroTogether.BackEnd.DB.Club", "Club")
+                        .WithMany("Crews")
+                        .HasForeignKey("ClubId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Crew_Club");
+
+                    b.OwnsOne("AstroTogether.BackEnd.DB.CrewPolicy", "Policy", b1 =>
+                        {
+                            b1.Property<Guid>("CrewId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<bool>("AutoAttend")
+                                .HasColumnType("bit");
+
+                            b1.HasKey("CrewId");
+
+                            b1.ToTable("Crew");
+
+                            b1.ToJson("Policy");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CrewId");
+                        });
+
+                    b.Navigation("Admin");
+
+                    b.Navigation("Club");
+
+                    b.Navigation("Policy")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Meet", b =>
                 {
+                    b.HasOne("AstroTogether.BackEnd.DB.Crew", "Crew")
+                        .WithMany("Meets")
+                        .HasForeignKey("CrewId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Meet_Crew");
+
                     b.HasOne("AstroTogether.BackEnd.DB.Site", "Site")
                         .WithMany("Meets")
                         .HasForeignKey("SiteId")
                         .IsRequired()
                         .HasConstraintName("FK_Meet_Site");
-
-                    b.HasOne("AstroTogether.BackEnd.DB.Team", "Team")
-                        .WithMany("Meets")
-                        .HasForeignKey("TeamId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Meet_Team");
 
                     b.OwnsOne("AstroTogether.BackEnd.DB.MeetDetails", "Details", b1 =>
                         {
@@ -283,12 +323,12 @@ namespace AstroTogether.BackEnd.Migrations
                                 .HasForeignKey("MeetId");
                         });
 
+                    b.Navigation("Crew");
+
                     b.Navigation("Details")
                         .IsRequired();
 
                     b.Navigation("Site");
-
-                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Member", b =>
@@ -345,46 +385,6 @@ namespace AstroTogether.BackEnd.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AstroTogether.BackEnd.DB.Team", b =>
-                {
-                    b.HasOne("AstroTogether.BackEnd.DB.Member", "Admin")
-                        .WithMany("Teams")
-                        .HasForeignKey("AdminId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Team_Member");
-
-                    b.HasOne("AstroTogether.BackEnd.DB.Club", "Club")
-                        .WithMany("Teams")
-                        .HasForeignKey("ClubId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Team_Club");
-
-                    b.OwnsOne("AstroTogether.BackEnd.DB.TeamPolicy", "Policy", b1 =>
-                        {
-                            b1.Property<Guid>("TeamId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<bool>("AutoAttend")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("TeamId");
-
-                            b1.ToTable("Team");
-
-                            b1.ToJson("Policy");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TeamId");
-                        });
-
-                    b.Navigation("Admin");
-
-                    b.Navigation("Club");
-
-                    b.Navigation("Policy")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Actor", b =>
                 {
                     b.Navigation("Members");
@@ -392,11 +392,16 @@ namespace AstroTogether.BackEnd.Migrations
 
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Club", b =>
                 {
+                    b.Navigation("Crews");
+
                     b.Navigation("Members");
 
                     b.Navigation("Sites");
+                });
 
-                    b.Navigation("Teams");
+            modelBuilder.Entity("AstroTogether.BackEnd.DB.Crew", b =>
+                {
+                    b.Navigation("Meets");
                 });
 
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Meet", b =>
@@ -408,15 +413,10 @@ namespace AstroTogether.BackEnd.Migrations
                 {
                     b.Navigation("Attendees");
 
-                    b.Navigation("Teams");
+                    b.Navigation("Crews");
                 });
 
             modelBuilder.Entity("AstroTogether.BackEnd.DB.Site", b =>
-                {
-                    b.Navigation("Meets");
-                });
-
-            modelBuilder.Entity("AstroTogether.BackEnd.DB.Team", b =>
                 {
                     b.Navigation("Meets");
                 });
