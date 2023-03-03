@@ -18,7 +18,7 @@
 * Dev: C# 11, .NET 7, Blazor WASM, MAUI, Function Apps 
 * Azure PaaS: SQL Server, SignalR, Blob storage, Redis, AD B2C
 #
-Contributions are always welcome (see [CONTRIBUTING.md](https://github.com/squideyes/Basics/blob/master/CONTRIBUTING.md) for details)
+Contributions are always welcome (see [CONTRIBUTING.md](https://github.com/squideyes/AstroTogether/blob/master/CONTRIBUTING.md) for details)
 
 **Supper-Duper Extra-Important Caveat**:  THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
