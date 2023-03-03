@@ -51,6 +51,8 @@ public static class ClubEndpoints
             {
                 var result = validator.Validate(club);
 
+                // see https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-7.0
+
                 //if (!result.IsValid)
                 //    return Results.ValidationProblem(result.ToDictionary());
 
