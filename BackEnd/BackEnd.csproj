@@ -1,37 +1,52 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-    <OutputType>Exe</OutputType>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AssemblyName>AstroTogether.BackEnd</AssemblyName>
-    <RootNamespace>AstroTogether.BackEnd</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.8.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.7.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="host.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="local.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>AstroTogether.BackEnd</AssemblyName>
+		<RootNamespace>AstroTogether.BackEnd</RootNamespace>
+		<Title>AstroTogether.BackEnd</Title>
+		<Authors>Louis S. Berman</Authors>
+		<Product>AstroTogether</Product>
+		<Description>A "back-end" function-app that supports the PhoneApp and AdminSite</Description>
+		<Copyright>Copyright 2023 by Louis S. Berman</Copyright>
+		<PackageTags>Astronomy;Observing</PackageTags>
+		<RepositoryUrl>https://github.com/squideyes/AstroTogether</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.8.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.7.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+	</ItemGroup>
 </Project>

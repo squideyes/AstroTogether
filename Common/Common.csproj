@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -6,6 +6,15 @@
 		<Nullable>enable</Nullable>
 		<AssemblyName>AstroTogether.Common</AssemblyName>
 		<RootNamespace>AstroTogether.Common</RootNamespace>
+		<Title>AstroTogether.Common</Title>
+		<Authors>Louis S. Berman</Authors>
+		<Product>AstroTogether</Product>
+		<Description>A set of common classes that supports the various AstroTogether modules</Description>
+		<Copyright>Copyright 2023 by Louis S. Berman</Copyright>
+		<PackageTags>Astronomy;Observing</PackageTags>
+		<RepositoryUrl>https://github.com/squideyes/AstroTogether</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
