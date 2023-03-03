@@ -4,7 +4,7 @@
 
 * Open-source multi-tenant design, segregated by Club
 * Club-setup and management via a Blazor WASM site
-* OpenAI EndUser and Admin APIs
+* OpenAI end-user and admin APIs
 * Android + iPhone apps; similar look & feel to WhatsApp
 * Email address + password sign-in, via Azure AD B2C
 * Prompted registration through an email-workflow
