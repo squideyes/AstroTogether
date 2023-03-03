@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{92A03754-3E1C-49DD-BC12-08CFD3E55137}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.csproj", "{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{628D7A31-B91E-49D2-9871-AEABC75DE6DD}"
 	ProjectSection(SolutionItems) = preProject
 		AstroTogether.sln.headertext = AstroTogether.sln.headertext
@@ -16,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{628D7A31-B
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{34825A38-4AF1-4373-8A38-77C9E7C7D0FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "BackEnd\BackEnd.csproj", "{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,17 +27,17 @@ Global
 		{92A03754-3E1C-49DD-BC12-08CFD3E55137}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92A03754-3E1C-49DD-BC12-08CFD3E55137}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92A03754-3E1C-49DD-BC12-08CFD3E55137}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{92A03754-3E1C-49DD-BC12-08CFD3E55137} = {34825A38-4AF1-4373-8A38-77C9E7C7D0FE}
-		{5F87E30F-A5F7-41A5-9004-44B1B6AAFA72} = {34825A38-4AF1-4373-8A38-77C9E7C7D0FE}
+		{7C775F9A-2F00-4BCC-80CA-B0133F9B7AF8} = {34825A38-4AF1-4373-8A38-77C9E7C7D0FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8AA2911B-9384-422D-98CB-E68F2A22A096}
