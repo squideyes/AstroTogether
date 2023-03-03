@@ -22,6 +22,7 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
+	  <None Include="C:\Code\Current\AstroTogether\BackEnd\.editorconfig" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.8.0" />
@@ -48,5 +49,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Code\Current\AstroTogether\BackEnd\.editorconfig" />
 	</ItemGroup>
 </Project>

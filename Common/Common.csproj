@@ -37,4 +37,12 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Code\Current\AstroTogether\Common\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="C:\Code\Current\AstroTogether\Common\.editorconfig" />
+	</ItemGroup>
+
 </Project>
