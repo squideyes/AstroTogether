@@ -7,7 +7,6 @@ public partial class Site
     public Guid SiteId { get; set; }
     public Guid ClubId { get; set; }
     public string Name { get; set; } = null!;
-    public string Blurb { get; set; } = null!;
     public SiteStatus Status { get; set; }
     public SiteDetails Details { get; set; } = null!;
 

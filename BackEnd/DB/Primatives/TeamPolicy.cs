@@ -1,6 +1,6 @@
 ﻿namespace AstroTogether.BackEnd.DB;
 
-public class CrewPolicy
+public class TeamPolicy
 {
     public bool AutoAttend { get; set; }
 }

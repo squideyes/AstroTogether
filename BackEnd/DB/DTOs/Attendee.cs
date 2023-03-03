@@ -6,9 +6,12 @@ public partial class Attendee
 {
     public Guid AttendeeId { get; set; }
     public Guid MeetId { get; set; }
-    public Guid MemberId { get; set; }
+    public Guid? PersonId { get; set; }
+    public Guid? MemberId { get; set; }
     public AttendeeStatus Status { get; set; }
+    public bool MeetAdmin { get; set; }
 
     public virtual Meet Meet { get; set; } = null!;
-    public virtual Member Member { get; set; } = null!;
+    public virtual Member? Member { get; set; }
+    public virtual Person? Person { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace AstroTogether.Common;
 
-public enum ActorStatus
+public enum PersonStatus
 {
     Created = 1,
     MustVerify,
